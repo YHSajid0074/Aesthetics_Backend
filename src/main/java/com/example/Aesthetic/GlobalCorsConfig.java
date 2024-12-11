@@ -1,10 +1,13 @@
 package com.example.Aesthetic;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+
+import java.util.Collections;
 
 @Configuration
 public class GlobalCorsConfig {
@@ -14,13 +17,9 @@ public class GlobalCorsConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowCredentials(true); // Allow credentials (cookies, authorization headers, etc.)
-        corsConfiguration.addAllowedOriginPattern("*"); // Allow all origins (or specify frontend URL)
-        corsConfiguration.addAllowedMethod("GET");
-        corsConfiguration.addAllowedMethod("POST");
-        corsConfiguration.addAllowedMethod("PUT");
-        corsConfiguration.addAllowedMethod("DELETE");
-        corsConfiguration.addAllowedMethod("OPTIONS"); // Allow preflight requests
+        corsConfiguration.setAllowCredentials(true);
+        corsConfiguration.addAllowedOriginPattern("*"); // Allow all origins
+        corsConfiguration.addAllowedMethod("*"); // Allow all HTTP methods
         corsConfiguration.addAllowedHeader("*"); // Allow all headers
         corsConfiguration.setMaxAge(3600L); // Cache preflight response for 1 hour
 
@@ -28,4 +27,3 @@ public class GlobalCorsConfig {
         return new CorsFilter(source);
     }
 }
-
