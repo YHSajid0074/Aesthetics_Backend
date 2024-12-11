@@ -14,12 +14,9 @@ public class GlobalCorsConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowCredentials(true);
-        corsConfiguration.addAllowedOrigin("http://localhost:4200"); // Allow your frontend origin
-        corsConfiguration.addAllowedMethod("GET"); // Allow specific methods
-        corsConfiguration.addAllowedMethod("POST");
-        corsConfiguration.addAllowedMethod("PUT");
-        corsConfiguration.addAllowedMethod("DELETE");
+        corsConfiguration.setAllowCredentials(true); // Allow credentials (cookies, authorization headers, etc.)
+        corsConfiguration.addAllowedOriginPattern("*"); // Allow all origins
+        corsConfiguration.addAllowedMethod("*"); // Allow all HTTP methods (GET, POST, PUT, DELETE, etc.)
         corsConfiguration.addAllowedHeader("*"); // Allow all headers
         corsConfiguration.setMaxAge(3600L); // Cache preflight response for 1 hour
 
