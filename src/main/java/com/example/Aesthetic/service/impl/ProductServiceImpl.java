@@ -142,5 +142,4 @@ public class ProductServiceImpl implements ProductService {
             public List<ProductResponseDto> findBySubCategory(String subcategory) {
                 return productRepo.findAllProductBySubCategory(subcategory);
             }
-        }
-
+}
