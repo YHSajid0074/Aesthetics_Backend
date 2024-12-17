@@ -1,5 +1,7 @@
 package com.example.Aesthetic.dto.response;
 
+import java.util.List;
+
 public interface ProductResponseDto {
     public String getName();
     public String getDescription();
@@ -11,4 +13,5 @@ public interface ProductResponseDto {
     public String getBrand();
     public String getWeight();
     public String getDimensions();
+    public byte[] getImageUrl();
 }

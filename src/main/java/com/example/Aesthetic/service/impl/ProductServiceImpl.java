@@ -1,5 +1,7 @@
 package com.example.Aesthetic.service.impl;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.example.Aesthetic.dto.request.ProductRequestDto;
 import com.example.Aesthetic.dto.response.ProductResponseDto;
 import com.example.Aesthetic.model.product.Product;
@@ -18,7 +20,7 @@ public class ProductServiceImpl implements ProductService {
         this.productRepo = productRepo;
     }
 
-    public Product ConvertToEntity(ProductRequestDto productRequestDto, Product product) {
+    public Product ConvertToEntity(ProductRequestDto productRequestDto, Product product,MultipartFile file) {
 
         product.setBrand(productRequestDto.brand());
         product.setName(productRequestDto.name());
@@ -30,21 +32,30 @@ public class ProductServiceImpl implements ProductService {
         product.setDescription(productRequestDto.description());
         product.setSubcategory(productRequestDto.category());
         product.setDimensions(productRequestDto.dimensions());
+        product.setImageName(file.getOriginalFilename()); // Set original file name
+        product.setImageType(file.getContentType()); // Set content type (e.g., image/jpeg)
+        try {
+            product.setImage(file.getBytes());
+        } catch (Exception e) {
+            throw new RuntimeException("Error saving image file: " + e.getMessage());
+        }
+
+
 
         return product;
 
     }
 
     @Override
-    public void add(ProductRequestDto productRequestDto) {
-        Product product = ConvertToEntity(productRequestDto, new Product());
+    public void add(ProductRequestDto productRequestDto,MultipartFile file) {
+        Product product = ConvertToEntity(productRequestDto, new Product(),file);
         productRepo.save(product);
     }
 
     @Override
-    public void update(ProductRequestDto productRequestDto,Long id ) {
+    public void update(ProductRequestDto productRequestDto,Long id,MultipartFile file ) {
         Product product = productRepo.findById(id).get();
-        Product updatedProduct = ConvertToEntity(productRequestDto, product);
+        Product updatedProduct = ConvertToEntity(productRequestDto, product,file);
         productRepo.save(updatedProduct);
     }
 
@@ -58,17 +69,78 @@ public class ProductServiceImpl implements ProductService {
         return productRepo.findAllProduct();
     }
 
-    @Override
     public ProductResponseDto findById(Long id) {
-        return productRepo.findProductById(id);
+        Product product = productRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        // Return the ProductResponseDto that includes the byte[] image
+        return new ProductResponseDto() {
+            @Override
+            public String getName() {
+                return product.getName();
+            }
+
+            @Override
+            public String getBrand() {
+                return product.getBrand();
+            }
+
+            @Override
+            public String getWeight() {
+                return product.getWeight();
+            }
+
+            @Override
+            public String getDescription() {
+                return product.getDescription();
+            }
+
+            @Override
+            public String getCategory() {
+                return product.getCategory();
+            }
+
+            @Override
+            public String getSubcategory() {
+                return product.getSubcategory();
+            }
+
+            @Override
+            public Double getPrice() {
+                return product.getPrice();
+            }
+
+            @Override
+            public Double getDiscount() {
+                return product.getDiscount();
+            }
+
+            @Override
+            public Integer getQuantity() {
+                return product.getQuantity();
+            }
+
+            @Override
+            public String getDimensions() {
+                return product.getDimensions();
+            }
+
+            @Override
+
+            public byte[] getImageUrl() {
+                return product.getImage();  // Return the byte[] image directly
+            }
+        };
     }
 
     @Override
-    public List<ProductResponseDto> findByCategory(String category) {
-        return productRepo.findAllProductByCategory(category);
-    }
-    @Override
-    public List<ProductResponseDto> findBySubCategory(String subcategory) {
-        return productRepo.findAllProductBySubCategory(subcategory);
-    }
-}
+            public List<ProductResponseDto> findByCategory(String category) {
+                return productRepo.findAllProductByCategory(category);
+            }
+
+            @Override
+            public List<ProductResponseDto> findBySubCategory(String subcategory) {
+                return productRepo.findAllProductBySubCategory(subcategory);
+            }
+        }
+

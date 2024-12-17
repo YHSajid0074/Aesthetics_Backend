@@ -1,5 +1,7 @@
 package com.example.Aesthetic.dto.request;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public record ProductRequestDto (
 
        String name,
@@ -11,7 +13,8 @@ public record ProductRequestDto (
        Integer quantity,
        String brand,
        String weight,
-       String dimensions
+       String dimensions,
+       MultipartFile file
 
 ){
 }

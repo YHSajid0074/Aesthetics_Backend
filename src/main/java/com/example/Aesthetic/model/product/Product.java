@@ -31,8 +31,12 @@ public class Product {
     private String weight;
     private String dimensions;
 
-    @ElementCollection
-    private List<String> imageUrls;
+    private String imageName; // Image name
+    private String imageType; // Image type (e.g., image/jpeg, image/png)
+
+    @Lob
+    @Column(length = 100000) // Adjust length based on your image size requirements
+    private byte[] image;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
