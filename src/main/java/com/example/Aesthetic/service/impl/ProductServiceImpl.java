@@ -1,5 +1,6 @@
 package com.example.Aesthetic.service.impl;
 
+import jakarta.transaction.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.Aesthetic.dto.request.ProductRequestDto;
@@ -10,6 +11,7 @@ import com.example.Aesthetic.service.ProductService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -29,8 +31,7 @@ public class ProductServiceImpl implements ProductService {
         product.setCategory(productRequestDto.category());
         product.setDiscount(productRequestDto.discount());
         product.setQuantity(productRequestDto.quantity());
-        product.setDescription(productRequestDto.description());
-        product.setSubcategory(productRequestDto.category());
+        product.setSubcategory(productRequestDto.subcategory());
         product.setDimensions(productRequestDto.dimensions());
         product.setImageName(file.getOriginalFilename()); // Set original file name
         product.setImageType(file.getContentType()); // Set content type (e.g., image/jpeg)
@@ -46,6 +47,7 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
+    @Transactional
     @Override
     public void add(ProductRequestDto productRequestDto,MultipartFile file) {
         Product product = ConvertToEntity(productRequestDto, new Product(),file);
@@ -64,11 +66,74 @@ public class ProductServiceImpl implements ProductService {
         productRepo.deleteById(id);
     }
 
+
     @Override
     public List<ProductResponseDto> findAll() {
-        return productRepo.findAllProduct();
+        List<Product> products = productRepo.findAll();
+
+        // Transform each Product into a ProductResponseDto
+        return products.stream()
+                .map(product -> new ProductResponseDto() {
+                    @Override
+                    public String getName() {
+                        return product.getName();
+                    }
+
+                    @Override
+                    public String getBrand() {
+                        return product.getBrand();
+                    }
+
+                    @Override
+                    public String getWeight() {
+                        return product.getWeight();
+                    }
+
+                    @Override
+                    public String getDescription() {
+                        return product.getDescription();
+                    }
+
+                    @Override
+                    public String getCategory() {
+                        return product.getCategory();
+                    }
+
+                    @Override
+                    public String getSubcategory() {
+                        return product.getSubcategory();
+                    }
+
+                    @Override
+                    public Double getPrice() {
+                        return product.getPrice();
+                    }
+
+                    @Override
+                    public Double getDiscount() {
+                        return product.getDiscount();
+                    }
+
+                    @Override
+                    public Integer getQuantity() {
+                        return product.getQuantity();
+                    }
+
+                    @Override
+                    public String getDimensions() {
+                        return product.getDimensions();
+                    }
+
+                    @Override
+                    public byte[] getImageUrl() {
+                        return product.getImage(); // Return the byte[] image directly
+                    }
+                })
+                .collect(Collectors.toList());
     }
 
+
+    @Override
     public ProductResponseDto findById(Long id) {
         Product product = productRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
