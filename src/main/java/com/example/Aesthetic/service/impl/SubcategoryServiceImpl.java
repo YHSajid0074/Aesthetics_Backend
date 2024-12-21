@@ -1,41 +1,48 @@
 package com.example.Aesthetic.service.impl;
 
+import com.example.Aesthetic.dto.request.SubcategoryRequestDto;
+import com.example.Aesthetic.dto.response.SubcategoryResponseDto;
 import com.example.Aesthetic.model.subcategory.Subcategory;
 import com.example.Aesthetic.repository.subcategoryrepo.SubcategoryRepo;
 import com.example.Aesthetic.service.SubcategoryService;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Set;
 
 @Service
 public class SubcategoryServiceImpl implements SubcategoryService {
+
     SubcategoryRepo subcategoryRepo;
 
     public SubcategoryServiceImpl(SubcategoryRepo subcategoryRepo) {
         this.subcategoryRepo = subcategoryRepo;
     }
 
-
-    @Override
-    public List<Subcategory> getAllSubcategories() {
-        return subcategoryRepo.findAll();
+    public Subcategory ConvertToEntity(SubcategoryRequestDto subcategoryRequestDto,Subcategory savedSubcategory) {
+        savedSubcategory.setName(savedSubcategory.getName());
+        return savedSubcategory;
     }
 
     @Override
-    public Subcategory getSubcategoryById(Long id) {
-        return subcategoryRepo.findById(id).get();
+    public Set<SubcategoryResponseDto> getAllSubcategoriesBy() {
+        return subcategoryRepo.findAllSubcategories();
     }
 
     @Override
-    public void addSubcategory(Subcategory subcategory) {
-        subcategoryRepo.save(subcategory);
+    public SubcategoryResponseDto getSubcategoryById(Long id) {
+        return subcategoryRepo.findSubcategoriesById(id);
     }
 
     @Override
-    public void updateSubcategory(Subcategory subcategory, Long id) {
+    public void addSubcategory(SubcategoryRequestDto subcategoryRequestDto) {
+
+    }
+
+    @Override
+    public void updateSubcategory(SubcategoryRequestDto subcategory, Long id) {
         Subcategory oldSubcategory = subcategoryRepo.findById(id).get();
-        oldSubcategory.setName(subcategory.getName());
-        subcategoryRepo.save(oldSubcategory);
+        Subcategory newSubcategory = ConvertToEntity(subcategory, oldSubcategory);
+        subcategoryRepo.save(newSubcategory);
     }
 
     @Override

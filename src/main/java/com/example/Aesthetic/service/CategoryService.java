@@ -1,18 +1,22 @@
 package com.example.Aesthetic.service;
 
+import com.example.Aesthetic.dto.request.CategoryRequestDto;
+import com.example.Aesthetic.dto.response.CategoryResponseDto;
 import com.example.Aesthetic.model.category.Category;
 
 import java.util.List;
+import java.util.Set;
 
 public interface CategoryService {
 
-    List<Category> getAllCategories();
+    Set<CategoryResponseDto> getAllCategories();
 
-    Category getCategoryById(Long id);
+    CategoryResponseDto getCategoryById(Long id);
 
-    Category saveCategory(Category category);
+    void saveCategory(CategoryRequestDto categoryRequestDto);
 
-    Category updateCategory(Category category,Long id);
+    void updateCategory(CategoryRequestDto categoryRequestDto,Long id);
 
     void deleteCategory(Long id);
+    public void addSubcategoryById(Long id, Long SubcategoryId);
 }

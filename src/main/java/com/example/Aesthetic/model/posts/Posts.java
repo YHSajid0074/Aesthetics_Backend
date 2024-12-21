@@ -1,9 +1,6 @@
 package com.example.Aesthetic.model.posts;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +17,12 @@ public class Posts {
     private Long id;
     private String title;
     private String content;
+    private String imageName; // Image name
+    private String imageType; // Image type (e.g., image/jpeg, image/png)
+
+    @Lob
+    @Column(length = 100000) // Adjust length based on your image size requirements
+    private byte[] image;
     public Long getId() {
         return id;
     }

@@ -5,8 +5,10 @@ import com.example.Aesthetic.dto.request.PostRequestDto;
 import com.example.Aesthetic.dto.response.PostsResponseDto;
 import com.example.Aesthetic.model.posts.Posts;
 import com.example.Aesthetic.service.PostService;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -22,8 +24,8 @@ public class PostController {
     }
 
     @PostMapping("CREATE")
-    public ResponseEntity<String> createPost(PostRequestDto postRequestDto) {
-        postService.create(postRequestDto);
+    public ResponseEntity<String> createPost(@RequestBody PostRequestDto postRequestDto, MultipartFile file) {
+        postService.create(postRequestDto,file);
         return ResponseEntity.ok("Post created");
     }
 
@@ -33,8 +35,8 @@ public class PostController {
     }
 
     @PutMapping("update")
-    public ResponseEntity<String> updatePost(PostRequestDto postRequestDto,Long id) {
-        postService.update(postRequestDto,id);
+    public ResponseEntity<String> updatePost(PostRequestDto postRequestDto,MultipartFile file ,Long id) {
+        postService.update(postRequestDto,id,file);
         return ResponseEntity.ok("Post updated");
     }
 

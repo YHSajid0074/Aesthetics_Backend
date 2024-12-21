@@ -34,7 +34,7 @@ public class EmailService {
 
             helper.setTo(to);
             helper.setFrom("yeamimhossainsajid@gmail.com");
-            helper.setSubject("JAVA r Springboot sekhen");
+            helper.setSubject("Mail from agiles.com");
             helper.setText(htmlContent, true); // true indicates HTML content
 
             mailSender.send(mimeMessage);
@@ -42,8 +42,6 @@ public class EmailService {
             throw new RuntimeException("Failed to send email", e);
         }
     }
-
-
 
     public String createEmailTemplate(String recipientName, String messageContent, String footerText) {
         return "<!DOCTYPE html>" +

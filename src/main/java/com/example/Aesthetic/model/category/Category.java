@@ -1,32 +1,57 @@
 package com.example.Aesthetic.model.category;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.example.Aesthetic.model.product.Product;
+import com.example.Aesthetic.model.subcategory.Subcategory;
+import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
 public class Category {
     @Id
-            @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String name;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
+    private String name;
+
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Subcategory> subcategories;
+
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Product> products;
+
+    // Getter and Setter for id
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    // Getter and Setter for name
     public String getName() {
         return name;
     }
 
-    // Setter
     public void setName(String name) {
         this.name = name;
     }
 
+    // Getter and Setter for subcategories
+    public List<Subcategory> getSubcategories() {
+        return subcategories;
+    }
+
+    public void setSubcategories(List<Subcategory> subcategories) {
+        this.subcategories = subcategories;
+    }
+
+    // Getter and Setter for products
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
 }

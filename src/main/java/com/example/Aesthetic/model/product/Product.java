@@ -1,5 +1,6 @@
 package com.example.Aesthetic.model.product;
 
+import com.example.Aesthetic.model.category.Category;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,7 +22,11 @@ public class Product {
 
     private String name;
     private String description;
-    private String category;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
+
     private String subcategory;
     private Double price;
     private Double discount;
@@ -40,5 +44,4 @@ public class Product {
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-
 }

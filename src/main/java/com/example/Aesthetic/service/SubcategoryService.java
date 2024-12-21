@@ -1,18 +1,21 @@
 package com.example.Aesthetic.service;
 
+import com.example.Aesthetic.dto.request.SubcategoryRequestDto;
+import com.example.Aesthetic.dto.response.SubcategoryResponseDto;
 import com.example.Aesthetic.model.subcategory.Subcategory;
 
 import java.util.List;
+import java.util.Set;
 
 public interface SubcategoryService {
 
-    public List<Subcategory> getAllSubcategories();
+    public Set<SubcategoryResponseDto> getAllSubcategoriesBy();
 
-    public Subcategory getSubcategoryById(Long id);
+    public SubcategoryResponseDto getSubcategoryById(Long id);
 
-    public void addSubcategory(Subcategory subcategory);
+    public void addSubcategory(SubcategoryRequestDto subcategory);
 
-    public void updateSubcategory(Subcategory subcategory,Long Id);
+    public void updateSubcategory(SubcategoryRequestDto subcategory,Long Id);
 
     public void deleteSubcategory(Long id);
 }
