@@ -12,7 +12,7 @@ public class Subcategory {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "category_id", nullable = false)
+    @JoinColumn(name = "category_id")
     private Category category;
 
     // Getter and Setter for id

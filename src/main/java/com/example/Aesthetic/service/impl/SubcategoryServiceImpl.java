@@ -19,7 +19,7 @@ public class SubcategoryServiceImpl implements SubcategoryService {
     }
 
     public Subcategory ConvertToEntity(SubcategoryRequestDto subcategoryRequestDto,Subcategory savedSubcategory) {
-        savedSubcategory.setName(savedSubcategory.getName());
+        savedSubcategory.setName(subcategoryRequestDto.name());
         return savedSubcategory;
     }
 
@@ -35,7 +35,8 @@ public class SubcategoryServiceImpl implements SubcategoryService {
 
     @Override
     public void addSubcategory(SubcategoryRequestDto subcategoryRequestDto) {
-
+        Subcategory subcategory=ConvertToEntity(subcategoryRequestDto,new Subcategory());
+        subcategoryRepo.save(subcategory);
     }
 
     @Override
