@@ -18,6 +18,7 @@ public interface CategoryService {
     void updateCategory(CategoryRequestDto categoryRequestDto,Long id);
 
     void deleteCategory(Long id);
-    public void addSubcategoryById(Long id, Long SubcategoryId);
+    public void addCategoryToSubcategory(Long id, Long SubcategoryId);
     public void addProductsById(Long categoryId, List<Long> productIds);
+    public void addBackground(Long categoryId, Long backgroundId);
 }

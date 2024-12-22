@@ -2,6 +2,7 @@ package com.example.Aesthetic.model.category;
 
 import com.example.Aesthetic.model.product.Product;
 import com.example.Aesthetic.model.subcategory.Subcategory;
+import com.example.Aesthetic.model.background.Background;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -18,6 +19,10 @@ public class Category {
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Product> products;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "background_id", referencedColumnName = "id")
+    private Background background;
 
     // Getter and Setter for id
     public Long getId() {
@@ -53,5 +58,14 @@ public class Category {
 
     public void setProducts(List<Product> products) {
         this.products = products;
+    }
+
+    // Getter and Setter for background
+    public Background getBackground() {
+        return background;
+    }
+
+    public void setBackground(Background background) {
+        this.background = background;
     }
 }

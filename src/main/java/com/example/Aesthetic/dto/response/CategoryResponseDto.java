@@ -8,6 +8,13 @@ public interface CategoryResponseDto {
 
    public String getName();
 
-   public Set<SubcategoryResponseDto> getSubcategory();
+   public Set<Subcategories> getSubcategories();
+   interface Subcategories {
+      public String getName();
+   }
 
+   public Backgrounds getBackground();
+   interface Backgrounds {
+      String getUrl();
+   }
 }

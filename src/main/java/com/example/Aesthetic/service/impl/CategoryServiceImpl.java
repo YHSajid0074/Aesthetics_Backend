@@ -2,9 +2,11 @@ package com.example.Aesthetic.service.impl;
 
 import com.example.Aesthetic.dto.request.CategoryRequestDto;
 import com.example.Aesthetic.dto.response.CategoryResponseDto;
+import com.example.Aesthetic.model.background.Background;
 import com.example.Aesthetic.model.category.Category;
 import com.example.Aesthetic.model.product.Product;
 import com.example.Aesthetic.model.subcategory.Subcategory;
+import com.example.Aesthetic.repository.backgroundrepo.BackgroundRepo;
 import com.example.Aesthetic.repository.categoryrepo.CategoryRepo;
 import com.example.Aesthetic.repository.productrepo.ProductRepo;
 import com.example.Aesthetic.repository.subcategoryrepo.SubcategoryRepo;
@@ -20,11 +22,13 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryRepo categoryRepo;
     public SubcategoryRepo subcategoryRepo;
     public ProductRepo productRepo;
+    public BackgroundRepo backgroundRepo;
 
-    public CategoryServiceImpl(CategoryRepo categoryRepo,SubcategoryRepo subcategoryRepo,ProductRepo productRepo) {
+    public CategoryServiceImpl(CategoryRepo categoryRepo,SubcategoryRepo subcategoryRepo,ProductRepo productRepo,BackgroundRepo backgroundRepo) {
         this.categoryRepo = categoryRepo;
         this.subcategoryRepo = subcategoryRepo;
         this.productRepo = productRepo;
+        this.backgroundRepo = backgroundRepo;
     }
 
     public Category ConverToEntity(CategoryRequestDto categoryRequestDto,Category category) {
@@ -60,20 +64,20 @@ public class CategoryServiceImpl implements CategoryService {
         categoryRepo.deleteById(id);
     }
 
-    public void addSubcategoryById(Long categoryId, Long subcategoryId) {
-        // Fetch the parent category
-        Category parentCategory = categoryRepo.findById(categoryId).orElseThrow(() ->
-                new RuntimeException("Parent category not found with id: " + categoryId));
-
+    public void addCategoryToSubcategory(Long subcategoryId, Long categoryId) {
         // Fetch the subcategory
         Subcategory subcategory = subcategoryRepo.findById(subcategoryId).orElseThrow(() ->
                 new RuntimeException("Subcategory not found with id: " + subcategoryId));
 
-        // Add the subcategory to the parent category
-        parentCategory.getSubcategories().add(subcategory);
+        // Fetch the category
+        Category category = categoryRepo.findById(categoryId).orElseThrow(() ->
+                new RuntimeException("Category not found with id: " + categoryId));
 
-        // Save the updated parent category
-        categoryRepo.save(parentCategory);
+        // Add the category to the subcategory's categories list
+        subcategory.setCategory(category);
+
+        // Save the updated subcategory
+        subcategoryRepo.save(subcategory);
     }
 
     public void addProductsById(Long categoryId, List<Long> productIds) {
@@ -91,5 +95,19 @@ public class CategoryServiceImpl implements CategoryService {
         // Save all the updated products
         productRepo.saveAll(products);
     }
+
+    @Override
+    public void addBackground(Long categoryId, Long backgroundId) {
+
+     Category category=categoryRepo.findById(categoryId).get();
+
+     Background background=backgroundRepo.findById(backgroundId).get();
+
+     category.setBackground(background);
+
+     categoryRepo.save(category);
+
+    }
+
 
 }
