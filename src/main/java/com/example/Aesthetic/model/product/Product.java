@@ -27,7 +27,6 @@ public class Product {
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
-    private String subcategory;
     private Double price;
     private Double discount;
     private Integer quantity;

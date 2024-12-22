@@ -3,8 +3,10 @@ package com.example.Aesthetic.service.impl;
 import com.example.Aesthetic.dto.request.CategoryRequestDto;
 import com.example.Aesthetic.dto.response.CategoryResponseDto;
 import com.example.Aesthetic.model.category.Category;
+import com.example.Aesthetic.model.product.Product;
 import com.example.Aesthetic.model.subcategory.Subcategory;
 import com.example.Aesthetic.repository.categoryrepo.CategoryRepo;
+import com.example.Aesthetic.repository.productrepo.ProductRepo;
 import com.example.Aesthetic.repository.subcategoryrepo.SubcategoryRepo;
 import com.example.Aesthetic.service.CategoryService;
 import org.springframework.stereotype.Service;
@@ -14,11 +16,15 @@ import java.util.Set;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
+
     public CategoryRepo categoryRepo;
     public SubcategoryRepo subcategoryRepo;
-    public CategoryServiceImpl(CategoryRepo categoryRepo,SubcategoryRepo subcategoryRepo) {
+    public ProductRepo productRepo;
+
+    public CategoryServiceImpl(CategoryRepo categoryRepo,SubcategoryRepo subcategoryRepo,ProductRepo productRepo) {
         this.categoryRepo = categoryRepo;
         this.subcategoryRepo = subcategoryRepo;
+        this.productRepo = productRepo;
     }
 
     public Category ConverToEntity(CategoryRequestDto categoryRequestDto,Category category) {
@@ -69,4 +75,21 @@ public class CategoryServiceImpl implements CategoryService {
         // Save the updated parent category
         categoryRepo.save(parentCategory);
     }
+
+    public void addProductsById(Long categoryId, List<Long> productIds) {
+        // Fetch the parent category
+        Category parentCategory = categoryRepo.findById(categoryId).orElseThrow(() ->
+                new RuntimeException("Category not found with id: " + categoryId));
+
+        // Fetch the products and associate them with the category
+        List<Product> products = productRepo.findAllById(productIds);
+
+        for (Product product : products) {
+            product.setCategory(parentCategory); // Set the category for each product
+        }
+
+        // Save all the updated products
+        productRepo.saveAll(products);
+    }
+
 }

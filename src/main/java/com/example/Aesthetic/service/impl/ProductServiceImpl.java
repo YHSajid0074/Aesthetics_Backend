@@ -1,5 +1,6 @@
 package com.example.Aesthetic.service.impl;
 
+import com.example.Aesthetic.dto.response.CategoryResponseDto;
 import jakarta.transaction.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,10 +29,9 @@ public class ProductServiceImpl implements ProductService {
         product.setName(productRequestDto.name());
         product.setPrice(productRequestDto.price());
         product.setDescription(productRequestDto.description());
-        product.setCategory(productRequestDto.category());
+
         product.setDiscount(productRequestDto.discount());
         product.setQuantity(productRequestDto.quantity());
-        product.setSubcategory(productRequestDto.subcategory());
         product.setDimensions(productRequestDto.dimensions());
         product.setImageName(file.getOriginalFilename()); // Set original file name
         product.setImageType(file.getContentType()); // Set content type (e.g., image/jpeg)
@@ -94,15 +94,6 @@ public class ProductServiceImpl implements ProductService {
                         return product.getDescription();
                     }
 
-                    @Override
-                    public String getCategory() {
-                        return product.getCategory();
-                    }
-
-                    @Override
-                    public String getSubcategory() {
-                        return product.getSubcategory();
-                    }
 
                     @Override
                     public Double getPrice() {
@@ -128,6 +119,13 @@ public class ProductServiceImpl implements ProductService {
                     public byte[] getImageUrl() {
                         return product.getImage(); // Return the byte[] image directly
                     }
+
+                    @Override
+                    public List<CategoryResponseDto> getCategory() {
+                        return List.of();
+                    }
+
+
                 })
                 .collect(Collectors.toList());
     }
@@ -161,16 +159,6 @@ public class ProductServiceImpl implements ProductService {
             }
 
             @Override
-            public String getCategory() {
-                return product.getCategory();
-            }
-
-            @Override
-            public String getSubcategory() {
-                return product.getSubcategory();
-            }
-
-            @Override
             public Double getPrice() {
                 return product.getPrice();
             }
@@ -195,6 +183,13 @@ public class ProductServiceImpl implements ProductService {
             public byte[] getImageUrl() {
                 return product.getImage();  // Return the byte[] image directly
             }
+
+            @Override
+            public List<CategoryResponseDto> getCategory() {
+                return List.of();
+            }
+
+
         };
     }
 

@@ -5,8 +5,6 @@ import java.util.List;
 public interface ProductResponseDto {
     public String getName();
     public String getDescription();
-    public String getCategory();
-    public String getSubcategory();
     public Double getPrice();
     public Double getDiscount();
     public Integer getQuantity();
@@ -14,4 +12,6 @@ public interface ProductResponseDto {
     public String getWeight();
     public String getDimensions();
     public byte[] getImageUrl();
+
+    public List<CategoryResponseDto>getCategory();
 }

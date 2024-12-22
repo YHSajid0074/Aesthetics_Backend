@@ -9,6 +9,7 @@ import com.example.Aesthetic.service.SubcategoryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -86,5 +87,10 @@ public class CategorySectionController {
             @RequestParam Long categoryId, @RequestParam Long subCategoryId) {
         categoryService.addSubcategoryById(categoryId, subCategoryId);
         return ResponseEntity.ok("Subcategory added to category");
+    }
+    @PostMapping("addProducts")
+    public ResponseEntity<String> addProductsToCategory(@RequestParam Long categoryId, @RequestBody List<Long> productIds) {
+        categoryService.addProductsById(categoryId, productIds);
+        return ResponseEntity.ok("Products added to category");
     }
 }
