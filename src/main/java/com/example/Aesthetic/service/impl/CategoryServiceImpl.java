@@ -45,7 +45,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryResponseDto getCategoryById(Long id) {
+    @Transactional
+    public Set<CategoryResponseDto>getCategoryById(Long id) {
         return categoryRepo.findCategoryById(id);
     }
 

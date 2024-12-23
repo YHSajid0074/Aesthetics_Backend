@@ -11,7 +11,7 @@ public interface CategoryService {
 
     Set<CategoryResponseDto> getAllCategories();
 
-    CategoryResponseDto getCategoryById(Long id);
+  Set<CategoryResponseDto> getCategoryById(Long id);
 
     void saveCategory(CategoryRequestDto categoryRequestDto);
 

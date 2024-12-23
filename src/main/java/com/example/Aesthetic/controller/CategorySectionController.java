@@ -36,8 +36,8 @@ public class CategorySectionController {
         return ResponseEntity.ok("Subcategory created");
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<CategoryResponseDto> getCategoryById(@PathVariable Long id) {
+    @GetMapping("getById")
+    public ResponseEntity<Set<CategoryResponseDto>> getCategoryById(@RequestParam Long id) {
         return ResponseEntity.ok(categoryService.getCategoryById(id));
     }
 
