@@ -122,8 +122,8 @@ public class ProductServiceImpl implements ProductService {
                     }
 
                     @Override
-                    public List<CategoryResponseDto> getCategory() {
-                        return List.of();
+                    public Set<CategoryResponseDto> getCategory() {
+                        return Set.of();
                     }
 
 
@@ -186,8 +186,8 @@ public class ProductServiceImpl implements ProductService {
             }
 
             @Override
-            public List<CategoryResponseDto> getCategory() {
-                return List.of();
+            public Set<CategoryResponseDto> getCategory() {
+                return Set.of();
             }
 
 

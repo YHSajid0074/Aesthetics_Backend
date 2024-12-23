@@ -22,15 +22,16 @@ public class Category {
 
     private String name;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Subcategory> subcategories;
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<Subcategory> subcategories;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Product> products;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "background_id", referencedColumnName = "id")
     private Background background;
+
 
     // Getter and Setter for id
     public Long getId() {
@@ -51,11 +52,11 @@ public class Category {
     }
 
     // Getter and Setter for subcategories
-    public List<Subcategory> getSubcategories() {
+    public Set<Subcategory> getSubcategories() {
         return subcategories;
     }
 
-    public void setSubcategories(List<Subcategory> subcategories) {
+    public void setSubcategories(Set<Subcategory> subcategories) {
         this.subcategories = subcategories;
     }
 

@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public interface PostRepo extends JpaRepository<Posts, Long> {
@@ -24,12 +25,18 @@ public interface PostRepo extends JpaRepository<Posts, Long> {
              WHERE p.title LIKE %:title%
             """)
 
-    public List<PostsResponseDto> findByTitle(String title);
+    public Set<PostsResponseDto> findByTitle(String title);
 
     @Query("""
              SELECT p
              FROM Posts p
             """)
 
-    public List<PostsResponseDto> findAllPosts();
+    public Set<PostsResponseDto> findAllPosts();
+    @Query("""
+             SELECT p
+             FROM Posts p
+            """)
+
+    public Set<Posts> findAllBy();
 }

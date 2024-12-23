@@ -1,32 +1,32 @@
 package com.example.Aesthetic.dto.response;
 
-import com.example.Aesthetic.model.subcategory.Subcategory;
-
 import java.util.List;
 import java.util.Set;
 
 public interface CategoryResponseDto {
 
-   public String getName();
+   String getName(); // Maps to c.name (alias: name)
 
-   public Set<Subcategories> getSubcategories();
-   interface Subcategories {
-      public String getName();
+   Background getBackground(); // Maps to b.url (alias: backgroundUrl)
+   interface Background {
+      String getBackgroundUrl(); // Maps to b.url
    }
 
-   public Backgrounds getBackground();
-   interface Backgrounds {
-      String getUrl();
+   Set<Subcategory> getSubcategories(); // Maps to s.name (alias: subcategoryName)
+   interface Subcategory {
+      String getSubcategoryName(); // Maps to s.name
    }
-   public Set<ProductInfo> getProducts();
-   interface ProductInfo {
-      public String getName();
-      public String getDescription();
-      public Double getPrice();
-      public Double getDiscount();
-      public Integer getQuantity();
-      public String getBrand();
-      public String getWeight();
-      public String getDimensions();
+
+   Set<Product> getProducts(); // Maps to product-related aliases
+   interface Product {
+      String getProductName(); // Maps to p.name
+      String getProductDescription(); // Maps to p.description
+      Double getProductPrice(); // Maps to p.price
+      Double getProductDiscount(); // Maps to p.discount
+      Integer getProductQuantity(); // Maps to p.quantity
+      String getProductBrand(); // Maps to p.brand
+      String getProductWeight(); // Maps to p.weight
+      String getProductDimensions(); // Maps to p.dimensions
    }
 }
+

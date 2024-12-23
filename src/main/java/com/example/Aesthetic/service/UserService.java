@@ -5,6 +5,7 @@ import com.example.Aesthetic.dto.request.UserRequestDto;
 import com.example.Aesthetic.dto.response.UserResponseDto;
 
 import java.util.List;
+import java.util.Set;
 
 public interface UserService {
 
@@ -18,6 +19,6 @@ public interface UserService {
 
     public UserResponseDto getUserByUsername(String username);
 
-    public List<UserResponseDto> getAllUsers();
+    public Set<UserResponseDto> getAllUsers();
 
 }

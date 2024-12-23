@@ -90,7 +90,7 @@ public class CategorySectionController {
     }
 
     @PostMapping("addProducts")
-    public ResponseEntity<String> addProductsToCategory(@RequestParam Long categoryId, @RequestBody List<Long> productIds) {
+    public ResponseEntity<String> addProductsToCategory(@RequestParam Long categoryId, @RequestBody Set<Long> productIds) {
         categoryService.addProductsById(categoryId, productIds);
         return ResponseEntity.ok("Products added to category");
     }

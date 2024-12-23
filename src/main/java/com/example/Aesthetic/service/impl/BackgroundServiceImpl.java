@@ -8,6 +8,7 @@ import com.example.Aesthetic.service.BackgroundService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class BackgroundServiceImpl implements BackgroundService {
@@ -35,7 +36,7 @@ public class BackgroundServiceImpl implements BackgroundService {
     }
 
     @Override
-    public List<BackgroundResponseDto> getBackgrounds() {
+    public Set<BackgroundResponseDto> getBackgrounds() {
         return backgroundRepo.findAllBy();
     }
 
@@ -57,7 +58,7 @@ public class BackgroundServiceImpl implements BackgroundService {
     }
 
     @Override
-    public List<BackgroundResponseDto> findByName(String name) {
+    public Set<BackgroundResponseDto> findByName(String name) {
         return backgroundRepo.findAllByName(name);
     }
 }

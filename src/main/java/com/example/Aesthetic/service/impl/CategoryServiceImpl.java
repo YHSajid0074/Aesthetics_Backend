@@ -80,7 +80,7 @@ public class CategoryServiceImpl implements CategoryService {
         subcategoryRepo.save(subcategory);
     }
 
-    public void addProductsById(Long categoryId, List<Long> productIds) {
+    public void addProductsById(Long categoryId, Set<Long> productIds) {
         // Fetch the parent category
         Category parentCategory = categoryRepo.findById(categoryId).orElseThrow(() ->
                 new RuntimeException("Category not found with id: " + categoryId));

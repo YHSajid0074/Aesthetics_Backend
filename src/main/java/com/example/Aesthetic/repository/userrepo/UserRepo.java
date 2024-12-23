@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public interface UserRepo extends JpaRepository<CUser, Long> {
@@ -33,5 +34,5 @@ public interface UserRepo extends JpaRepository<CUser, Long> {
                     """
     )
 
-    public List<UserResponseDto> findAllbY();
+    public Set<UserResponseDto> findAllbY();
 }

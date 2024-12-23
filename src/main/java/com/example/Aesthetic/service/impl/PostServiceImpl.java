@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -50,8 +51,8 @@ public class PostServiceImpl implements PostService {
 
 
     @Override
-    public List<PostsResponseDto> findAll() {
-        List<Posts> posts = postRepo.findAll();
+    public Set<PostsResponseDto> findAll() {
+        Set<Posts> posts = postRepo.findAllBy();
 
         return posts.stream()
                 .map(post -> new PostsResponseDto() {
@@ -81,7 +82,7 @@ public class PostServiceImpl implements PostService {
                         return post.getImage(); // Get the image byte array from the post entity
                     }
                 })
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
 
@@ -98,7 +99,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<PostsResponseDto> findByTitle(String title) {
+    public Set<PostsResponseDto> findByTitle(String title) {
         return postRepo.findByTitle(title);
     }
 

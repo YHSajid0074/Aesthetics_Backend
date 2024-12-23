@@ -19,6 +19,6 @@ public interface CategoryService {
 
     void deleteCategory(Long id);
     public void addCategoryToSubcategory(Long id, Long SubcategoryId);
-    public void addProductsById(Long categoryId, List<Long> productIds);
+    public void addProductsById(Long categoryId, Set<Long> productIds);
     public void addBackground(Long categoryId, Long backgroundId);
 }

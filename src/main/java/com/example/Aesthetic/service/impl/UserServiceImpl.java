@@ -9,6 +9,7 @@ import com.example.Aesthetic.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -55,7 +56,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserResponseDto> getAllUsers() {
+    public Set<UserResponseDto> getAllUsers() {
         return userRepo.findAllbY();
     }
 }

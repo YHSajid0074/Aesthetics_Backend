@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public interface BackgroundRepo extends JpaRepository<Background, Long> {
@@ -22,13 +23,13 @@ public interface BackgroundRepo extends JpaRepository<Background, Long> {
               SELECT b
               FROM Background b
             """)
-    public List<BackgroundResponseDto> findAllBy();
+    public Set<BackgroundResponseDto> findAllBy();
 
     @Query("""
             SELECT b
             FROM Background b
             WHERE b.name LIKE %:name%
             """)
-    public List<BackgroundResponseDto> findAllByName(String name);
+    public Set<BackgroundResponseDto> findAllByName(String name);
 
 }

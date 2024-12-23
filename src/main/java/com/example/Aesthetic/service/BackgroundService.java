@@ -5,12 +5,13 @@ import com.example.Aesthetic.dto.response.BackgroundResponseDto;
 import com.example.Aesthetic.model.background.Background;
 
 import java.util.List;
+import java.util.Set;
 
 public interface BackgroundService {
     public void createBackground(BackgroundRequestDto backgroundRequestDto);
-    public List<BackgroundResponseDto> getBackgrounds();
+    public Set<BackgroundResponseDto> getBackgrounds();
     public BackgroundResponseDto getBackground(Long id);
     public void updateBackground(BackgroundRequestDto backgroundRequestDto, Long id);
     public void deleteBackground(Long id);
-    public List<BackgroundResponseDto> findByName(String name);
+    public Set<BackgroundResponseDto> findByName(String name);
 }

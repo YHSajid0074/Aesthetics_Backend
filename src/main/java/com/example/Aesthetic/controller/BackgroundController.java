@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("background")
@@ -20,7 +21,7 @@ public class BackgroundController {
     }
 
     @GetMapping("all")
-    public ResponseEntity<List<BackgroundResponseDto>> getAllBackgrounds() {
+    public ResponseEntity<Set<BackgroundResponseDto>> getAllBackgrounds() {
         return ResponseEntity.ok(backgroundService.getBackgrounds());
     }
 
@@ -48,7 +49,7 @@ public class BackgroundController {
     }
 
     @GetMapping("find/{name}")
-    public ResponseEntity<List<BackgroundResponseDto>>findByName(@RequestParam String name) {
+    public ResponseEntity<Set<BackgroundResponseDto>>findByName(@RequestParam String name) {
         return ResponseEntity.ok(backgroundService.findByName(name));
     }
 }

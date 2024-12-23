@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("post")
@@ -41,12 +42,12 @@ public class PostController {
     }
 
     @GetMapping("GetAll")
-    public ResponseEntity<List<PostsResponseDto>> findAllPosts() {
+    public ResponseEntity<Set<PostsResponseDto>> findAllPosts() {
         return ResponseEntity.ok(postService.findAll());
     }
 
     @GetMapping("find/{title}")
-    public ResponseEntity<List<PostsResponseDto>> findAllByTitle(String title) {
+    public ResponseEntity<Set<PostsResponseDto>> findAllByTitle(String title) {
         return ResponseEntity.ok(postService.findByTitle(title));
     }
 

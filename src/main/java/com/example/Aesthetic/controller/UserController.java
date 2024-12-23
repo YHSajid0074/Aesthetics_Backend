@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 
 @RestController
@@ -48,7 +49,7 @@ public class UserController {
     }
 
     @GetMapping("getAll")
-    public ResponseEntity<List<UserResponseDto>> getAllUsers() {
+    public ResponseEntity<Set<UserResponseDto>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
