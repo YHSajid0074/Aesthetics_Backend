@@ -11,6 +11,7 @@ import com.example.Aesthetic.repository.categoryrepo.CategoryRepo;
 import com.example.Aesthetic.repository.productrepo.ProductRepo;
 import com.example.Aesthetic.repository.subcategoryrepo.SubcategoryRepo;
 import com.example.Aesthetic.service.CategoryService;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,6 +38,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Transactional
     public Set<CategoryResponseDto> getAllCategories() {
         return categoryRepo.findAllCategory();
     }

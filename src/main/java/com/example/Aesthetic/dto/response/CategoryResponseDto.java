@@ -9,24 +9,24 @@ public interface CategoryResponseDto {
 
    Background getBackground(); // Maps to b.url (alias: backgroundUrl)
    interface Background {
-      String getBackgroundUrl(); // Maps to b.url
+      String getUrl(); // Maps to b.url
    }
 
    Set<Subcategory> getSubcategories(); // Maps to s.name (alias: subcategoryName)
    interface Subcategory {
-      String getSubcategoryName(); // Maps to s.name
+      public String getName(); // Maps to s.name
    }
 
    Set<Product> getProducts(); // Maps to product-related aliases
    interface Product {
-      String getProductName(); // Maps to p.name
-      String getProductDescription(); // Maps to p.description
-      Double getProductPrice(); // Maps to p.price
-      Double getProductDiscount(); // Maps to p.discount
-      Integer getProductQuantity(); // Maps to p.quantity
-      String getProductBrand(); // Maps to p.brand
-      String getProductWeight(); // Maps to p.weight
-      String getProductDimensions(); // Maps to p.dimensions
+      public String getName();
+      public String getDescription();
+      public Double getPrice();
+      public Double getDiscount();
+      public Integer getQuantity();
+      public String getBrand();
+      public String getWeight();
+      public String getDimensions();
    }
 }
 

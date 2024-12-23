@@ -19,21 +19,15 @@ public interface CategoryRepo extends JpaRepository<Category, Long> {
 
     @Query("""
     SELECT c.name AS name,
-           b.url AS backgroundUrl,
-           s.name AS subcategoryName,
-           p.name AS productName,
-           p.description AS productDescription,
-           p.price AS productPrice,
-           p.discount AS productDiscount,
-           p.quantity AS productQuantity,
-           p.brand AS productBrand,
-           p.weight AS productWeight,
-           p.dimensions AS productDimensions
+           c.products as products,
+               c.background AS background,
+                   c.subcategories as subcategories
+                   
     FROM Category c
-    LEFT JOIN c.background b
-    LEFT JOIN c.subcategories s
-    LEFT JOIN c.products p
-""")
+    LEFT JOIN Product p on 1=1
+        LEFT JOIN Background b on 1=1
+            LEFT JOIN Subcategory s on 1=1
+    """)
     Set<CategoryResponseDto> findAllCategory();
 
 
