@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("Product")
@@ -61,17 +62,17 @@ public class ProductController {
 //    }
 
     @GetMapping("getAll")
-    public ResponseEntity<List<ProductResponseDto>> getAllProducts() {
+    public ResponseEntity<Set<ProductResponseDto>> getAllProducts() {
         return ResponseEntity.ok(productService.findAll());
     }
 
     @GetMapping("category")
-    public ResponseEntity<List<ProductResponseDto>> getAllProductsByCategory(@RequestParam String category) {
+    public ResponseEntity<Set<ProductResponseDto>> getAllProductsByCategory(@RequestParam String category) {
         return ResponseEntity.ok(productService.findByCategory(category));
     }
 
     @GetMapping("subCategory")
-    public ResponseEntity<List<ProductResponseDto>> getAllProductsBySubCategory(@RequestParam String SubCategory) {
+    public ResponseEntity<Set<ProductResponseDto>> getAllProductsBySubCategory(@RequestParam String SubCategory) {
         return ResponseEntity.ok(productService.findBySubCategory(SubCategory));
     }
 

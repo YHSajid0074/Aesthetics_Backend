@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public interface ProductRepo extends JpaRepository<Product, Long> {
@@ -23,14 +24,14 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
             SELECT p
             FROM Product p
             """)
-    public List<ProductResponseDto> findAllProduct();
+    public Set<ProductResponseDto> findAllProduct();
 
     @Query("""
             SELECT p
             FROM Product p
             WHERE p.category = :category
       """)
-    public List<ProductResponseDto> findAllProductByCategory(String category);
+    public Set<ProductResponseDto> findAllProductByCategory(String category);
 
     @Query("""
         SELECT p
@@ -39,9 +40,11 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
         JOIN c.subcategories s
         WHERE s.name = :subcategory
 """)
-    public List<ProductResponseDto> findAllProductBySubCategory(@Param("subcategory") String subcategory);
-    ;
-
-
+    public Set<ProductResponseDto> findAllProductBySubCategory(@Param("subcategory") String subcategory);;
+    @Query("""
+            SELECT p
+            FROM Product p
+            """)
+  public Set<Product>findAllSet();
 }
 

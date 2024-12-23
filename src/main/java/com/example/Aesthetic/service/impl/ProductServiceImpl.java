@@ -12,6 +12,7 @@ import com.example.Aesthetic.service.ProductService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -68,8 +69,8 @@ public class ProductServiceImpl implements ProductService {
 
 
     @Override
-    public List<ProductResponseDto> findAll() {
-        List<Product> products = productRepo.findAll();
+    public Set<ProductResponseDto> findAll() {
+        Set<Product> products = productRepo.findAllSet();
 
         // Transform each Product into a ProductResponseDto
         return products.stream()
@@ -127,7 +128,7 @@ public class ProductServiceImpl implements ProductService {
 
 
                 })
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
 
@@ -194,12 +195,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-            public List<ProductResponseDto> findByCategory(String category) {
+            public Set<ProductResponseDto> findByCategory(String category) {
                 return productRepo.findAllProductByCategory(category);
             }
 
             @Override
-            public List<ProductResponseDto> findBySubCategory(String subcategory) {
+            public Set<ProductResponseDto> findBySubCategory(String subcategory) {
                 return productRepo.findAllProductBySubCategory(subcategory);
             }
 }

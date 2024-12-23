@@ -4,8 +4,16 @@ import com.example.Aesthetic.model.product.Product;
 import com.example.Aesthetic.model.subcategory.Subcategory;
 import com.example.Aesthetic.model.background.Background;
 import jakarta.persistence.*;
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.List;
+import java.util.Set;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Entity
 public class Category {
     @Id
@@ -18,7 +26,7 @@ public class Category {
     private List<Subcategory> subcategories;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Product> products;
+    private Set<Product> products;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "background_id", referencedColumnName = "id")
@@ -52,11 +60,11 @@ public class Category {
     }
 
     // Getter and Setter for products
-    public List<Product> getProducts() {
+    public Set<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(Set<Product> products) {
         this.products = products;
     }
 

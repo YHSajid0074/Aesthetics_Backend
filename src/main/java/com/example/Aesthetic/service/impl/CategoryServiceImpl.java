@@ -84,16 +84,18 @@ public class CategoryServiceImpl implements CategoryService {
         // Fetch the parent category
         Category parentCategory = categoryRepo.findById(categoryId).orElseThrow(() ->
                 new RuntimeException("Category not found with id: " + categoryId));
-
-        // Fetch the products and associate them with the category
-        List<Product> products = productRepo.findAllById(productIds);
-
-        for (Product product : products) {
-            product.setCategory(parentCategory); // Set the category for each product
-        }
-
-        // Save all the updated products
-        productRepo.saveAll(products);
+//
+//        // Fetch the products and associate them with the category
+//        List<Product> products = productRepo.findAllById(productIds);
+//
+//        for (Product product : products) {
+//            product.setCategory(parentCategory); // Set the category for each product
+//        }
+  for(Long productId : productIds) {
+      Product product=productRepo.findById(productId).get();
+      product.setCategory(parentCategory);
+      productRepo.save(product);
+  }
     }
 
     @Override
