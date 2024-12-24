@@ -23,7 +23,6 @@ public class PostController {
 
     public PostController(PostService postService) {
         this.postService = postService;
-
     }
 
 //    @PostMapping(value="/add", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
@@ -49,9 +48,9 @@ public class PostController {
       return ResponseEntity.ok( postService.findById(id));
     }
 
-    @PutMapping("update")
-    public ResponseEntity<String> updatePost(PostRequestDto postRequestDto,MultipartFile file ,Long id) {
-        postService.update(postRequestDto,id,file);
+    @PutMapping(value="/update", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+    public ResponseEntity<String> updatePost(@ModelAttribute PostRequestDto postRequestDto,@RequestParam Long id) {
+        postService.update(postRequestDto,id,postRequestDto.file());
         return ResponseEntity.ok("Post updated");
     }
 

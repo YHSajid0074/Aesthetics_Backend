@@ -117,6 +117,7 @@ public class PostServiceImpl implements PostService {
 
 
     @Override
+    @Transactional
     public void update(PostRequestDto postRequestDto, Long id,MultipartFile file) {
         Posts posts = postRepo.findById(id).get();
         Posts Update = ConvertToEntity(postRequestDto, posts,file);
