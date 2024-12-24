@@ -22,13 +22,13 @@ public class ProductController {
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
-    @PostMapping("/add1")
-    public ResponseEntity<String> addProduct1(
-            @RequestParam("image") MultipartFile image  // Handle image as MultipartFile
-            ) { // Handle product details as request body
-
-        return ResponseEntity.ok("Product added successfully!");
-    }
+//    @PostMapping("/add1")
+//    public ResponseEntity<String> addProduct1(
+//            @RequestParam("image") MultipartFile image  // Handle image as MultipartFile
+//            ) { // Handle product details as request body
+//
+//        return ResponseEntity.ok("Product added successfully!");
+//    }
 
     //    @PostMapping("create")
 //    public ResponseEntity<String>create(@RequestBody ProductRequestDto productRequestDto,@RequestPart MultipartFile file) {

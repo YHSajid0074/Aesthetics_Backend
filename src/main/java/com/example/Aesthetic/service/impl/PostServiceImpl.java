@@ -5,6 +5,7 @@ import com.example.Aesthetic.dto.response.PostsResponseDto;
 import com.example.Aesthetic.model.posts.Posts;
 import com.example.Aesthetic.repository.postsrepo.PostRepo;
 import com.example.Aesthetic.service.PostService;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -45,12 +46,41 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    @Transactional
     public PostsResponseDto findById(Long id) {
-        return postRepo.findPostById(id);
+        Posts post= postRepo.findById(id).get();
+        return new PostsResponseDto() {
+            @Override
+            public String getTitle() {
+                return post.getTitle();
+            }
+
+            @Override
+            public String getContent() {
+                return post.getContent();
+            }
+
+            @Override
+            public String getImageName() {
+                return post.getImageName();
+            }
+
+            @Override
+            public String getImageType() {
+                return post.getImageType();
+            }
+
+            @Override
+            public byte[] getImage() {
+                return post.getImage();
+            }
+
+        };
     }
 
 
     @Override
+    @Transactional
     public Set<PostsResponseDto> findAll() {
         Set<Posts> posts = postRepo.findAllBy();
 
