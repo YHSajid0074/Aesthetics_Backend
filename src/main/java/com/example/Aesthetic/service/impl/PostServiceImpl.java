@@ -130,8 +130,37 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    @Transactional
     public Set<PostsResponseDto> findByTitle(String title) {
-        return postRepo.findByTitle(title);
+       Set<Posts>posts= postRepo.findByTitle(title);
+       return posts.stream().map(posts1 -> new PostsResponseDto() {
+
+           @Override
+           public String getTitle() {
+               return posts1.getTitle();
+           }
+
+           @Override
+           public String getContent() {
+               return posts1.getContent();
+           }
+
+           @Override
+           public String getImageName() {
+               return posts1.getImageName();
+           }
+
+           @Override
+           public String getImageType() {
+               return posts1.getImageType();
+           }
+
+           @Override
+           public byte[] getImage() {
+               return posts1.getImage();
+           }
+       })
+               .collect(Collectors.toSet());
     }
 
 }

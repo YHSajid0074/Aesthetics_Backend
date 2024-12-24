@@ -59,8 +59,8 @@ public class PostController {
         return ResponseEntity.ok(postService.findAll());
     }
 
-    @GetMapping("find/{title}")
-    public ResponseEntity<Set<PostsResponseDto>> findAllByTitle(String title) {
+    @GetMapping(value="/findByTitle")
+    public ResponseEntity<Set<PostsResponseDto>> findAllByTitle(@RequestParam String title) {
         return ResponseEntity.ok(postService.findByTitle(title));
     }
 
