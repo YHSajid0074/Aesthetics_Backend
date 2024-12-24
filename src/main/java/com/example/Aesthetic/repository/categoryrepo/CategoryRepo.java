@@ -36,8 +36,4 @@ public interface CategoryRepo extends JpaRepository<Category, Long> {
             """)
     Set<CategoryResponseDto> findAllCategory();
 
-
-
-
-
 }
