@@ -5,6 +5,7 @@ import com.example.Aesthetic.dto.response.BackgroundResponseDto;
 import com.example.Aesthetic.model.background.Background;
 import com.example.Aesthetic.repository.backgroundrepo.BackgroundRepo;
 import com.example.Aesthetic.service.BackgroundService;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,6 +37,7 @@ public class BackgroundServiceImpl implements BackgroundService {
     }
 
     @Override
+    @Transactional
     public Set<BackgroundResponseDto> getBackgrounds() {
         return backgroundRepo.findAllBy();
     }

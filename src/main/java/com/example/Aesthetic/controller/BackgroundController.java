@@ -20,10 +20,10 @@ public class BackgroundController {
         this.backgroundService = backgroundService;
     }
 
-    @GetMapping("all")
-    public ResponseEntity<Set<BackgroundResponseDto>> getAllBackgrounds() {
-        return ResponseEntity.ok(backgroundService.getBackgrounds());
-    }
+//    @GetMapping("all")
+//    public ResponseEntity<Set<BackgroundResponseDto>> getAllBackgrounds() {
+//        return ResponseEntity.ok(backgroundService.getBackgrounds());
+//    }
 
     @GetMapping("{id}")
     public ResponseEntity<BackgroundResponseDto> getBackgroundById(@RequestParam Long id) {
