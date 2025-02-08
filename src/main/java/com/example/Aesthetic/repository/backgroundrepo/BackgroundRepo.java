@@ -31,5 +31,4 @@ public interface BackgroundRepo extends JpaRepository<Background, Long> {
             WHERE b.name LIKE %:name%
             """)
     public Set<BackgroundResponseDto> findAllByName(String name);
-
 }
